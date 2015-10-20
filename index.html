@@ -31,7 +31,7 @@
         }
       }
       document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
-      
+
       return true;
     },
     removeItem: function (sKey, sPath, sDomain) {
@@ -85,8 +85,8 @@
       docCookies.setItem("test5", "Hello world!", "Fri, 20 Aug 88354 14:07:15 GMT", "/cookie");       //| X      | X  | X      | X       | X
       docCookies.setItem("test6", "Hello world!", 150);                                             //| O      | O  | O      | O       | O
       docCookies.setItem("test7", "Hello world!", 245, "/cookie");                                 //| X      | X  | X      | X       | X
-      docCookies.setItem("test8", "Hello world!", null, null, "example.com");                       //| X      | X  | X      | X       | X
-      docCookies.setItem("test9", "Hello world!", null, null, null, true);                          //| X      | X  | X      | X       | X
+      docCookies.setItem("test8", "Hello world!", null, "/cookie", "example.com");                       //| X      | X  | X      | X       | X
+      docCookies.setItem("test9", "Hello world!", null, "/cookie", null, true);                          //| X      | X  | X      | X       | X
     };
 
     var clearCookie = function() {
