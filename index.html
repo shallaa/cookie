@@ -5,6 +5,7 @@
   <title></title>
 </head>
 <body>
+<button id="getCookie">GET COOKIE</button><button id="setCookie">SET COOKIE</button><button id="clearCookie">CLEAR COOKIE</button>
 <script>
 
   // https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
@@ -49,37 +50,62 @@
   };
 
 
-  (function() {
+  (function(doc) {
     var print = function() {
-      document.writeln('<p>' + Array.prototype.join.call(arguments, '') + '</p>');
+      var p = doc.createElement('p');
+      p.textContent = Array.prototype.join.call(arguments, '');
+      doc.body.appendChild(p);
     };
-                                                                                                  //| Chrome | FF | Safari
-    docCookies.setItem("test0", "Hello world!");                                                  //| O      | O  | O
-    docCookies.setItem("test1", "Unicode test: \u00E0\u00E8\u00EC\u00F2\u00F9", Infinity);        //| O      | O  | O
-    docCookies.setItem("test1;=", "Safe character test;=", Infinity);                             //| O      | O  | O
-    docCookies.setItem("test2", "Hello world!", new Date(2020, 5, 12));                           //| O      | O  | O
-    docCookies.setItem("test3", "Hello world!", new Date(2027, 2, 3), "/blog");                   //| X      | X  | X
-    docCookies.setItem("test4", "Hello world!", "Wed, 19 Feb 2127 01:04:55 GMT");                 //| O      | O  | O
-    docCookies.setItem("test5", "Hello world!", "Fri, 20 Aug 88354 14:07:15 GMT", "/home");       //| X      | X  | X
-    docCookies.setItem("test6", "Hello world!", 150);                                             //| O      | O  | O
-    docCookies.setItem("test7", "Hello world!", 245, "/content");                                 //| X      | X  | X
-    docCookies.setItem("test8", "Hello world!", null, null, "example.com");                       //| X      | X  | X
-    docCookies.setItem("test9", "Hello world!", null, null, null, true);                          //| X      | X  | X
 
-    print('test0: ', docCookies.getItem("test0"));
-    print('test1: ', docCookies.getItem("test1"));
-    print('test1;=: ', docCookies.getItem("test1;="));
-    print('test2: ', docCookies.getItem("test2"));
-    print('test3: ', docCookies.getItem("test3"));
-    print('test4: ', docCookies.getItem("test4"));
-    print('test5: ', docCookies.getItem("test5"));
-    print('test6: ', docCookies.getItem("test6"));
-    print('test7: ', docCookies.getItem("test7"));
-    print('test8: ', docCookies.getItem("test8"));
-    print('test9: ', docCookies.getItem("test9"));
-    print('=====================================');
-    print('document.cookie: ', document.cookie);
-  })();
+    var getCookie = function() {
+      print('=====================================');
+      print('test0: ', docCookies.getItem("test0"));
+      print('test1: ', docCookies.getItem("test1"));
+      print('test1;=: ', docCookies.getItem("test1;="));
+      print('test2: ', docCookies.getItem("test2"));
+      print('test3: ', docCookies.getItem("test3"));
+      print('test4: ', docCookies.getItem("test4"));
+      print('test5: ', docCookies.getItem("test5"));
+      print('test6: ', docCookies.getItem("test6"));
+      print('test7: ', docCookies.getItem("test7"));
+      print('test8: ', docCookies.getItem("test8"));
+      print('test9: ', docCookies.getItem("test9"));
+      print('document.cookie: ', doc.cookie);
+    };
+
+    var setCookie = function() {
+                                                                                                    //| Chrome | FF | Safari | IE Edge | IE 11
+      docCookies.setItem("test0", "Hello world!");                                                  //| O      | O  | O      | O       | O
+      docCookies.setItem("test1", "Unicode test: \u00E0\u00E8\u00EC\u00F2\u00F9", Infinity);        //| O      | O  | O      | O       | O
+      docCookies.setItem("test1;=", "Safe character test;=", Infinity);                             //| O      | O  | O      | O       | O
+      docCookies.setItem("test2", "Hello world!", new Date(2020, 5, 12));                           //| O      | O  | O      | O       | O
+      docCookies.setItem("test3", "Hello world!", new Date(2027, 2, 3), "/blog");                   //| X      | X  | X      | X       | X
+      docCookies.setItem("test4", "Hello world!", "Wed, 19 Feb 2127 01:04:55 GMT");                 //| O      | O  | O      | O       | O
+      docCookies.setItem("test5", "Hello world!", "Fri, 20 Aug 88354 14:07:15 GMT", "/home");       //| X      | X  | X      | X       | X
+      docCookies.setItem("test6", "Hello world!", 150);                                             //| O      | O  | O      | O       | O
+      docCookies.setItem("test7", "Hello world!", 245, "/content");                                 //| X      | X  | X      | X       | X
+      docCookies.setItem("test8", "Hello world!", null, null, "example.com");                       //| X      | X  | X      | X       | X
+      docCookies.setItem("test9", "Hello world!", null, null, null, true);                          //| X      | X  | X      | X       | X
+    };
+
+    var clearCookie = function() {
+      docCookies.removeItem("test0");
+      docCookies.removeItem("test1");
+      docCookies.removeItem("test1;=");
+      docCookies.removeItem("test2");
+      docCookies.removeItem("test3");
+      docCookies.removeItem("test4");
+      docCookies.removeItem("test5");
+      docCookies.removeItem("test6");
+      docCookies.removeItem("test7");
+      docCookies.removeItem("test8");
+      docCookies.removeItem("test9");
+    };
+
+    doc.getElementById('getCookie').onclick = function() { getCookie(); };
+    doc.getElementById('setCookie').onclick = function() { setCookie(); };
+    doc.getElementById('clearCookie').onclick = function() { clearCookie(); };
+  })(document);
 </script>
 </body>
 </html>
