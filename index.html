@@ -93,13 +93,13 @@
       docCookies.removeItem("test1");
       docCookies.removeItem("test1;=");
       docCookies.removeItem("test2");
-      docCookies.removeItem("test3");
+      docCookies.removeItem("test3", "/cookie");
       docCookies.removeItem("test4");
-      docCookies.removeItem("test5");
+      docCookies.removeItem("test5", "/cookie");
       docCookies.removeItem("test6");
-      docCookies.removeItem("test7");
-      docCookies.removeItem("test8");
-      docCookies.removeItem("test9");
+      docCookies.removeItem("test7", "/cookie");
+      docCookies.removeItem("test8", "/cookie");
+      docCookies.removeItem("test9", "/cookie");
     };
 
     doc.getElementById('getCookie').onclick = function() { getCookie(); };
